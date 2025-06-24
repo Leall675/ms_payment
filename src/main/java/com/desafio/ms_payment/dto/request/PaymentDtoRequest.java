@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 public class PaymentDtoRequest {
-
+    @NotNull(message = "O valor não pode ser nulo.")
     @Positive(message = "O valor do pagamento deve ser maior que zero.")
     private Double amount;
 
