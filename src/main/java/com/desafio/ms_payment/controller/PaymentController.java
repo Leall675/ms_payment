@@ -35,4 +35,10 @@ public class PaymentController {
         PaymentDtoResponse response = paymentService.buscaPorID(id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable String id) {
+        paymentService.deletar(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
