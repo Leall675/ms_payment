@@ -8,6 +8,8 @@ import com.desafio.ms_payment.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PaymentService {
 
@@ -23,4 +25,10 @@ public class PaymentService {
         Payment savedPayment = paymentRepository.save(payment);
         return paymentMapper.toPaymentResponse(savedPayment);
     }
+
+    public List<PaymentDtoResponse> listarTodos() {
+        List<Payment> paymentList = paymentRepository.findAll();
+        return paymentList.stream().map(payment -> paymentMapper.toPaymentResponse(payment)).toList();
+    }
+
 }

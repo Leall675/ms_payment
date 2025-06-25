@@ -7,10 +7,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/payments")
@@ -23,5 +22,11 @@ public class PaymentController {
     public ResponseEntity<PaymentDtoResponse> salvar(@RequestBody @Valid PaymentDtoRequest dto) {
         PaymentDtoResponse response = paymentService.salvar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PaymentDtoResponse>> listarTodos() {
+        List<PaymentDtoResponse> response = paymentService.listarTodos();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
