@@ -2,6 +2,7 @@ package com.desafio.ms_payment.service;
 
 import com.desafio.ms_payment.dto.request.PaymentDtoRequest;
 import com.desafio.ms_payment.dto.response.PaymentDtoResponse;
+import com.desafio.ms_payment.exception.PaymentNotFoundExcemption;
 import com.desafio.ms_payment.mapper.PaymentMapper;
 import com.desafio.ms_payment.model.Payment;
 import com.desafio.ms_payment.repository.PaymentRepository;
@@ -29,6 +30,11 @@ public class PaymentService {
     public List<PaymentDtoResponse> listarTodos() {
         List<Payment> paymentList = paymentRepository.findAll();
         return paymentList.stream().map(payment -> paymentMapper.toPaymentResponse(payment)).toList();
+    }
+
+    public PaymentDtoResponse buscaPorID(String id) {
+        Payment payment = paymentRepository.findById(id).orElseThrow(() -> new PaymentNotFoundExcemption("Produto não localizado na base de dados."));
+        return paymentMapper.toPaymentResponse(payment);
     }
 
 }

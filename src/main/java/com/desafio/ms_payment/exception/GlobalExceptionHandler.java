@@ -31,4 +31,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erroResposta);
     }
 
+    @ExceptionHandler(PaymentNotFoundExcemption.class)
+    public ResponseEntity<ErroResposta> handlePaymentNotFoundExcemption(PaymentNotFoundExcemption ex) {
+        ErroResposta erroResposta = new ErroResposta(HttpStatus.NOT_FOUND.value(), ex.getMessage(), List.of());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erroResposta);
+    }
 }
