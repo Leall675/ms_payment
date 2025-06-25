@@ -19,10 +19,10 @@ public class PaymentDtoRequest {
     @Positive(message = "O valor do pagamento deve ser maior que zero.")
     private Double amount;
 
-    @NotNull(message = "O método de pagamento não pode ser nulo. Valores válidos: PIX, CARTAO, BOLETO")
+    @NotNull(message = "O método de pagamento não pode ser nulo.")
     private PaymentEnum paymentMethod;
 
-    @NotNull(message = "O status do pagamento não pode ser nulo. Valores válidos: PENDENTE, COMPLETO, CANCELADO ")
+    @NotNull(message = "O status do pagamento não pode ser nulo.")
     private PaymentStatus paymentStatus;
 
 }
