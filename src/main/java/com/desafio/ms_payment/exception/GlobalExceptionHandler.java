@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErroResposta> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
-        ErroResposta erroResposta = new ErroResposta(HttpStatus.BAD_REQUEST.value(), "Erro de validação, verifique os valores enviados.", List.of());
+        ErroResposta erroResposta = new ErroResposta(HttpStatus.BAD_REQUEST.value(), "Erro de validação: verifique os tipos de dados enviados.", List.of());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erroResposta);
     }
 
@@ -35,5 +35,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErroResposta> handlePaymentNotFoundExcemption(PaymentNotFoundExcemption ex) {
         ErroResposta erroResposta = new ErroResposta(HttpStatus.NOT_FOUND.value(), ex.getMessage(), List.of());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erroResposta);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErroResposta> handleGenericException(Exception ex) {
+        ErroResposta resposta = new ErroResposta();
+        resposta.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        resposta.setMessage("Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.");
+        resposta.setErros(List.of());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resposta);
     }
 }
