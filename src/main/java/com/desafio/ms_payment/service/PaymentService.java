@@ -37,4 +37,9 @@ public class PaymentService {
         return paymentMapper.toPaymentResponse(payment);
     }
 
+    public void deletar(String id) {
+        Payment payment = paymentRepository.findById(id).orElseThrow(() -> new PaymentNotFoundExcemption("Produto não localizado na base de dados."));
+        paymentRepository.deleteById(id);
+    }
+
 }
