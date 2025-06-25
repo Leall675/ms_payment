@@ -29,4 +29,10 @@ public class PaymentController {
         List<PaymentDtoResponse> response = paymentService.listarTodos();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PaymentDtoResponse> buscaPorID(@PathVariable String id) {
+        PaymentDtoResponse response = paymentService.buscaPorID(id);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }
